@@ -201,7 +201,7 @@ function App() {
   useEffect(() => {
     const liveTrackIntervalId = setInterval(() => {
       // refetchCryptoTrack();
-      dispatch(cryptoListApi.util.invalidateTags(["CryptoData"]));
+      dispatch(cryptoListApi.util.resetApiState());
     }, fetchInterval);
 
     return () => {
@@ -212,7 +212,7 @@ function App() {
   useEffect(() => {
     const liveCryptoPriceIntervalId = setInterval(() => {
       // refetchCryptoPrice();
-      dispatch(cryptoListApi.util.invalidateTags(["CryptoData"]));
+      dispatch(cryptoListApi.util.resetApiState());
     }, fetchInterval);
 
     return () => {
