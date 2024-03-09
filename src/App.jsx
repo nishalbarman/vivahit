@@ -200,8 +200,8 @@ function App() {
 
   useEffect(() => {
     const liveTrackIntervalId = setInterval(() => {
-      // refetchCryptoTrack();
-      dispatch(cryptoListApi.util.resetApiState());
+      refetchCryptoTrack();
+      dispatch(cryptoListApi.util.invalidateTags(["CryptoData"]));
     }, fetchInterval);
 
     return () => {
@@ -211,8 +211,8 @@ function App() {
 
   useEffect(() => {
     const liveCryptoPriceIntervalId = setInterval(() => {
-      // refetchCryptoPrice();
-      dispatch(cryptoListApi.util.resetApiState());
+      refetchCryptoPrice();
+      dispatch(cryptoListApi.util.invalidateTags(["CryptoData"]));
     }, fetchInterval);
 
     return () => {
@@ -257,48 +257,13 @@ function App() {
                   ?.map((usbObject) => usbObject.USD)
                   ?.join("")}
               </p>
-              {/* <div className="flex gap-3">
-                <div className="flex flex-col gap-1">
-                  <p className="text-gray-500 text-sm text-center font-semibold">
-                    Mkt. Cap.
-                  </p>
-                  <p className="border border-gray-200 font-semibold rounded-md p-1 pl-3 pr-3">
-                    {selectedCryptoDetails?.market_cap}
-                  </p>
-                </div>
-                <div className="flex flex-col gap-1">
-                  <p className="text-gray-500 text-sm text-center font-semibold">
-                    Low/High 24h
-                  </p>
-                  <p className="border border-gray-200 font-semibold rounded-md p-1 pl-3 pr-3">
-                    {selectedCryptoDetails?.LOW24HOUR} -{" "}
-                    {selectedCryptoDetails?.HIGH24HOUR}
-                  </p>
-                </div>
-              </div> */}
             </div>
           </div>
-          {/* <div className="p-4">
-            <label htmlFor="table-duration" className="sr-only">
-              FetchInterval
-            </label>
-            <div className="relative mt-1">
-              <input
-                onChange={(e) => {
-                  setFetchInterval(e.target.value * 1000);
-                }}
-                type="number"
-                id="table-duration"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 pl-3.5 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Track Interval (default: 10sec)"
-              />
-            </div>
-          </div> */}
         </div>
         <div className="flex flex-col w-[100%]">
           <div className="container justify-center mx-auto flex flex-col">
             <div className="overflow-x-auto shadow-md sm:rounded-lg">
-              <div className="inline-block min-w-full align-middle dark:bg-gray-800">
+              <div className="inline-block min-w-full align-middle">
                 <div className="p-4">
                   <label htmlFor="table-search" className="sr-only">
                     Search
@@ -306,7 +271,7 @@ function App() {
                   <div className="relative mt-1">
                     <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                       <svg
-                        className="w-5 h-5 text-gray-500 dark:text-gray-400"
+                        className="w-5 h-5 text-gray-500 "
                         fill="currentColor"
                         viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
@@ -321,53 +286,53 @@ function App() {
                       onChange={handleSearchTextChange}
                       type="text"
                       id="table-search"
-                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 pl-10 p-2.5  "
                       placeholder="Search for crypto"
                     />
                   </div>
                 </div>
                 <div className="overflow-hidden">
-                  <table className="min-w-full table-fixed dark:divide-gray-700 divide-y divide-green-400 ">
-                    <thead className="bg-gray-100 dark:bg-gray-700">
+                  <table className="min-w-full table-fixed divide-y divide-green-400 ">
+                    <thead className="bg-gray-100 ">
                       <tr>
                         <th
                           scope="col"
-                          className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                          className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase ">
                           #
                         </th>
                         <th
                           scope="col"
-                          className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                          className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
                           Name
                         </th>
                         <th
                           scope="col"
-                          className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                          className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
                           price
                         </th>
                         <th
                           scope="col"
-                          className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                          className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
                           1h %
                         </th>
                         <th
                           scope="col"
-                          className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                          className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
                           24h %
                         </th>
                         <th
                           scope="col"
-                          className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                          className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
                           Market Cap
                         </th>
                         <th
                           scope="col"
-                          className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                          className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase ">
                           Volumn(24h)
                         </th>
                       </tr>
                     </thead>
-                    <tbody className="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
+                    <tbody className="bg-white divide-y divide-gray-200 ">
                       {cryptoData?.length > 0 &&
                         cryptoData?.map(
                           (
@@ -411,11 +376,11 @@ function App() {
                                 }
                               }}
                               key={index}
-                              className="hover:bg-gray-100 dark:hover:bg-gray-700">
+                              className="hover:bg-gray-100 ">
                               <td className="p-4 w-4">
                                 <div className="flex items-center">{Id}</div>
                               </td>
-                              <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                              <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap ">
                                 <img
                                   className="w-7 h-7 aspect-square inline mr-3"
                                   src={`https://cryptocompare.com/${ImageUrl}`}
@@ -425,24 +390,24 @@ function App() {
                                   ({symbol})
                                 </span>
                               </td>
-                              <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                              <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
                                 {price || "No Data"}
                               </td>
-                              <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                              <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
                                 {percent_change_1h
                                   ? percent_change_1h + "%"
                                   : "No Data"}
                               </td>
-                              <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                              <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
                                 {percent_change_24h
                                   ? percent_change_24h + "%"
                                   : "No Data"}
                               </td>
 
-                              <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                              <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
                                 {market_cap || "No Data"}
                               </td>
-                              <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                              <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
                                 {volume_24h || "No Data"}
                               </td>
                             </tr>
