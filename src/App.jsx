@@ -230,7 +230,7 @@ function App() {
   }, [cryptoList]);
 
   if (isLoading) {
-    return <p>Loading ...</p>;
+    return <p className="text-lg text-center">Loading ...</p>;
   }
 
   if (isError) {

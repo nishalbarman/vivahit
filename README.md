@@ -1,6 +1,6 @@
 ## Overview
 
-Welcome to our cool dashboard made with React.js and Chart.js! It helps you see live cryptocurrency rates in a really easy way.
+Welcome to our simple easy to use dashboard made with React.js and Chart.js! It helps you see live cryptocurrency rates in a really easy way.
 
 ### Quick Start
 
